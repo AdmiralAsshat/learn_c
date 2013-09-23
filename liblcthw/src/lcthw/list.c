@@ -20,8 +20,9 @@ void List_destroy(List *list)
 
 void List_clear(List *list)
 {
-	List_clear(list);
-	List_destroy(list);
+	LIST_FOREACH(list, first, next, cur) {
+	free(cur->value);
+	}
 }
 
 void List_clear_destroy(List *list)
@@ -37,7 +38,7 @@ void List_push(List *list, void *value)
 
 	node->value = value;
 
-	if(list->last == NULL){
+	if(list->last == NULL) {
 		list->first = node;
 		list->last = node;
 	} else {
