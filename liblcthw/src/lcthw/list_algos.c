@@ -1,9 +1,11 @@
 #include<lcthw/dbg.h>
 #include<lcthw/list_algos.h>
 
-List *List_bubble_sort(List *list)
+List *List_bubble_sort(List *list, (List_compare) method)
 {
-	ListNode *cur;
+	ListNode *cur = malloc(sizeof(ListNode));
+	check(cur !=NULL, "Could not allocate memory.");
+	
 	int swapped = 0;
 
 	do
