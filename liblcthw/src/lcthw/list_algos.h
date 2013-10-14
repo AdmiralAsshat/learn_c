@@ -4,6 +4,9 @@
 #include<lcthw/list.h>
 #include<stdlib.h>
 
-List *List_bubble_sort(List *list);
+typedef int (*List_compare)(char *a, char *b);
+
+List *List_bubble_sort(List *list, (List compare) method);
+
 
 #endif
