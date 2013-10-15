@@ -6,7 +6,6 @@
 
 typedef int (*List_compare)(char *a, char *b);
 
-List *List_bubble_sort(List *list, (List compare) method);
-
+int List_bubble_sort(List *list, List_compare method);
 
 #endif
