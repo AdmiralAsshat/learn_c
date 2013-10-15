@@ -3,26 +3,22 @@
 
 List *List_bubble_sort(List *list, (List_compare) method)
 {
+	ListNode *outer, inner, temp = NULL;
 	ListNode *cur = malloc(sizeof(ListNode));
 	check(cur !=NULL, "Could not allocate memory.");
 	
-	int swapped = 0;
-
-	do
-	{
-		swapped = 0;
-		for (cur = list->first; cur->next != NULL; cur = cur->next)
+	for (outer = list->first; outer->next != NULL; outer = outer->next)
+		for (inner = outer; inner->next != NULL; inner = inner->next)
 		{
-			if (cur->value > cur->next->value)
+			cur = inner;
+			if (method(cur, cur->next) > 1)
 			{
-				cur->next = cur->next->next;
-				cur->next->prev = cur->prev;
-				cur->prev = cur->next;
-				cur->prev->next = cur;
-				swapped = 1;
+				temp = cur->next;
+				cur->next = cur;
+				cur = temp;
 			}
 		}
-	} while (swapped == 0);
 
 return list;
 }
+
