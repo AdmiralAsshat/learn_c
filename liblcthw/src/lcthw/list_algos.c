@@ -73,7 +73,7 @@ error:
 return 1;
 }
 
-int List_merge_sort(List *list, List_compare method)
+List *List_merge_sort(List *list, List_compare method)
 {
 	int i;
 	int size = list->count;
@@ -82,10 +82,10 @@ int List_merge_sort(List *list, List_compare method)
 	// Don't sort an empty list
 	if (size <= 1)
 		{
-			return 0;
+			return list;
 		}
 
-	List *left, *right;
+	List *left, *right, *result;
 	left = List_create();
 	right = List_create();
 
@@ -107,14 +107,18 @@ int List_merge_sort(List *list, List_compare method)
 	left = List_merge_sort(left,strcmp);
 	right = List_merge_sort(right,strcmp);
 
-	merge(left, right);
+	result = merge(left, right);
 
-	return 0;
+	return result;
 error:
-return 1;
+if (left) { free(left)};
+if (right) { free(right)};
+if (result) { free(result)};
+return NULL;
+
 }
 
-List merge(List *left, List *right)
+List *merge(List *left, List *right)
 {
 	List result;
 
