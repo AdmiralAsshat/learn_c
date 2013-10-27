@@ -72,3 +72,72 @@ free(elems);
 error:
 return 1;
 }
+
+int List_merge_sort(List *list, List_compare method)
+{
+	int i;
+	int size = list->count;
+	ListNode *tmp;
+
+	// Don't sort an empty list
+	if (size <= 1)
+		{
+			return 0;
+		}
+
+	List *left, *right;
+	left = List_create();
+	right = List_create();
+
+	int mid = size / 2;
+
+	for (i = 0, tmp = list->first; i < size; i++, tmp = tmp->next)
+	{
+		check(tmp != NULL, "Bad; got a null in the list.")
+		if (i < mid)
+		{
+			List_push(left, tmp->value);
+		} else {
+			List_push(right, tmp->value);
+		}
+		
+	}
+
+
+	left = List_merge_sort(left,strcmp);
+	right = List_merge_sort(right,strcmp);
+
+	merge(left, right);
+
+	return 0;
+error:
+return 1;
+}
+
+List merge(List *left, List *right)
+{
+	List result;
+
+	while (left->count > 0 || right->count > 0)
+	{
+		if (left->count > 0 && right->count > 0)
+		{
+			if(strcmp(left->first->value, right->first->value) >= 0)
+				{	List_push(result, left->first);
+					List_remove(left, left->first);
+				} else {
+					List_push(result, right->first);
+					List_remove(right, right->first);
+				}
+
+		} else if (left->count > 0) {
+			List_push(result, left->first);
+			List_remove(left, left->first);
+		} else if (right->count > 0) {
+			List_push(result, right->first);
+			List_remove(right, right->first);
+		}
+	}
+
+	return result;
+}
