@@ -1,0 +1,4 @@
+ex25.c: In function ‘main’:
+ex25.c:113:35: error: ‘last_name’ undeclared (first use in this function)
+ex25.c:113:35: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [ex25] Error 1
