@@ -23,7 +23,7 @@ int List_bubble_sort(List *list, List_compare method)
     for(i = 0,tmp=list->first ; i < size ;i++,tmp=tmp->next)
 	{
 	  elems[i] = tmp;
-	  printf("Debug: elems[%d] value: %s\n",i,elems[i]->value);
+	// printf("Debug: elems[%d] value: %s\n",i,elems[i]->value);
 
 	}
 
@@ -33,7 +33,7 @@ int List_bubble_sort(List *list, List_compare method)
 		{
 			if (method(elems[i]->value, elems[j]->value) > 0)
 			{
-			    printf("SWAP %s %s\n",(char *)elems[i]->value,(char *)elems[j]->value);
+			   /* printf("SWAP %s %s\n",(char *)elems[i]->value,(char *)elems[j]->value); */
 				tmp = elems[i];
 				elems[i] = elems[j];
 				elems[j] = tmp;
@@ -41,12 +41,12 @@ int List_bubble_sort(List *list, List_compare method)
 		}
 	}
 
-    for(i = 0 ; i < size ;i++)
+    /*for(i = 0 ; i < size ;i++)
 	{
 	  
 	  printf("After Debug: elems[%d] value: %s\n",i,(char *)elems[i]->value);
 
-	}
+	}*/
 
 	list->first = elems[0];
 	elems[0]->prev=NULL;
@@ -60,12 +60,7 @@ int List_bubble_sort(List *list, List_compare method)
 		elems[i]->next = NULL;
 	}
 
-    for(tmp=list->first ; tmp!=NULL ;tmp=tmp->next)
-	{
-	  printf("COCK %s \n",(char *)tmp->value);
-	}
-
-free(elems);
+	free(elems);
 
 	return 0;
 
@@ -111,34 +106,34 @@ List *List_merge_sort(List *list, List_compare method)
 
 	return result;
 error:
-if (left) { free(left)};
-if (right) { free(right)};
-if (result) { free(result)};
+if (left) { free(left);}
+if (right) { free(right);}
+if (result) { free(result);}
 return NULL;
 
 }
 
 List *merge(List *left, List *right)
 {
-	List result;
+	List *result = List_create();
 
 	while (left->count > 0 || right->count > 0)
 	{
 		if (left->count > 0 && right->count > 0)
 		{
 			if(strcmp(left->first->value, right->first->value) >= 0)
-				{	List_push(result, left->first);
+				{	List_push(result, left->first->value);
 					List_remove(left, left->first);
 				} else {
-					List_push(result, right->first);
+					List_push(result, right->first->value);
 					List_remove(right, right->first);
 				}
 
 		} else if (left->count > 0) {
-			List_push(result, left->first);
+			List_push(result, left->first->value);
 			List_remove(left, left->first);
 		} else if (right->count > 0) {
-			List_push(result, right->first);
+			List_push(result, right->first->value);
 			List_remove(right, right->first);
 		}
 	}
