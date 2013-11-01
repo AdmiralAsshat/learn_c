@@ -10,4 +10,5 @@ int List_bubble_sort(List *list, List_compare method);
 List *List_merge_sort(List *list, List_compare method);
 List *merge(List *left, List *right);
 
+void printlist(List *list);
 #endif

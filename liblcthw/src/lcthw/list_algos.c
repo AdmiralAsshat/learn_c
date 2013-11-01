@@ -1,6 +1,23 @@
 #include<lcthw/dbg.h>
 #include<lcthw/list_algos.h>
 
+void printlist(List *list)
+{
+	ListNode *tmp=NULL;
+	
+	if(!list)
+		return;
+
+	tmp = list->first;
+
+	printf("DEBUG: Values : ");
+    for(tmp=list->first ; tmp != NULL ;tmp=tmp->next)
+	{
+		printf("%s ,",tmp->value);
+	}
+	printf("\n");
+}
+
 int List_bubble_sort(List *list, List_compare method)
 {
 	int i, j;
@@ -98,7 +115,6 @@ List *List_merge_sort(List *list, List_compare method)
 		
 	}
 
-
 	left = List_merge_sort(left,strcmp);
 	right = List_merge_sort(right,strcmp);
 
@@ -116,12 +132,16 @@ return NULL;
 List *merge(List *left, List *right)
 {
 	List *result = List_create();
+	printf("DEBUG: Left List:\n");
+	printlist(left);
+	printf("DEBUG: Right List:\n");
+	printlist(right);
 
 	while (left->count > 0 || right->count > 0)
 	{
 		if (left->count > 0 && right->count > 0)
 		{
-			if(strcmp(left->first->value, right->first->value) >= 0)
+			if(strcmp(left->first->value, right->first->value) < 0)
 				{	List_push(result, left->first->value);
 					List_remove(left, left->first);
 				} else {
@@ -137,6 +157,9 @@ List *merge(List *left, List *right)
 			List_remove(right, right->first);
 		}
 	}
+
+	printf("DEBUG: merge result:\n");
+	printlist(result);
 
 	return result;
 }
