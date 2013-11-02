@@ -96,10 +96,11 @@ return NULL;
 List *merge(List *left, List *right)
 {
 	List *result = List_create();
+/*	Used during debugging; no longer needed
 	printf("DEBUG: Left List:\n");
 	printlist(left);
 	printf("DEBUG: Right List:\n");
-	printlist(right);
+	printlist(right); */
 
 	while (left->count > 0 || right->count > 0)
 	{
@@ -122,8 +123,8 @@ List *merge(List *left, List *right)
 		}
 	}
 
-	printf("DEBUG: merge result:\n");
-	printlist(result);
+/*	printf("DEBUG: merge result:\n");
+	printlist(result); */
 
 	return result;
 }
