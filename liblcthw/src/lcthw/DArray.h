@@ -12,7 +12,7 @@ typedef struct DArray {
 	void **contents;
 } DArray;
 
-DArray *DArrary_create(size_t element_size, size_t initial_max);
+DArray *DArray_create(size_t element_size, size_t initial_max);
 
 void DArray_destroy(DArray *array);
 
@@ -29,7 +29,7 @@ void *DArray_pop(DArray *array);
 void DArray_clear_destroy(DArray *array);
 
 #define DArray_last(A) ((A)->contents[(A)->end - 1])
-#define DArray_first(A) ((A->contents[0])
+#define DArray_first(A) ((A)->contents[0])
 #define DArray_end(A) ((A)->end)
 #define DArray_count(A) DArray_end(A)
 #define DArray_max(A) ((A)->max)
@@ -47,7 +47,7 @@ error:
 
 static inline void *DArray_get(DArray *array, int i)
 {
-	check(i < array->max, "darray attempt to get past max,");
+	check(i < array->max, "darray attempt to get past max");
 	return array->contents[i];
 error:
 	return NULL;

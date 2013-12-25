@@ -15,8 +15,8 @@ DArray *DArray_create(size_t element_size, size_t initial_max)
 	return(array);
 
 error:
-if(array) free(array);
-return NULL;
+	if(array) free(array);
+	return NULL;
 }
 
 void DArray_destroy(DArray *array)
@@ -30,7 +30,7 @@ void DArray_destroy(DArray *array)
 
 void DArray_clear(DArray *array)
 {
-	int elem;
+	int elem = 0;
 	// Don't bother clearing an empty array
 	if(array->element_size > 0)
 	{
@@ -47,7 +47,7 @@ void DArray_clear(DArray *array)
 static inline int DArray_resize(DArray *array, size_t newsize)
 {
 	array->max = newsize;
-	check(array -> max > 0, "The newsize must be > 0");
+	check(array->max > 0, "The newsize must be > 0");
 
 	void *contents = realloc(array->contents, array->max * sizeof(void *));
 	// check contents and assume realloc doesn't harm the original on error

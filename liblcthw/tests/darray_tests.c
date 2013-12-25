@@ -11,7 +11,7 @@ char *test_create()
 	mu_assert(array != NULL, "DArray_create failed.");
 	mu_assert(array->contents != NULL, "contents are wrong in darray");
 	mu_assert(array->end == 0, "end isn't at the right spot");
-	mu_assert(array->element_size == sizeof(int), "elemental size is wrong");
+	mu_assert(array->element_size == sizeof(int), "element size is wrong.");
 	mu_assert(array->max == 100, "wrong max length on initial size");
 
 	return NULL;
@@ -75,10 +75,10 @@ char *test_expand_contract()
 	mu_assert((unsigned int)array->max == old_max + array->expand_rate, "Wrong size after expand.");
 
 	DArray_contract(array);
-	mu_assert((unsigned int)array->max == array->expand_rate + 1, "Should stay at the expand rate at least.");
+	mu_assert((unsigned int)array->max == array->expand_rate + 1, "Should stay at the expand_rate at least.");
 
 	DArray_contract(array);
-	mu_assert((unsigned int)array->max == array->expand_rate + 1, "Should stay at the expand rate at least.");
+	mu_assert((unsigned int)array->max == array->expand_rate + 1, "Should stay at the expand_rate at least.");
 
 	return NULL;
 }
