@@ -5,7 +5,7 @@ DArray *DArray_create(size_t element_size, size_t initial_max)
 	DArray *array = malloc(sizeof(DArray));
 	check_mem(array);
 	array->max = initial_max;
-	check(array->max > 0, "You must set an initial max > 0.");
+	check(array->max > 0, "You must set an initial_max > 0.");
 
 	array->end = 0;
 	array->element_size = element_size;
@@ -47,7 +47,7 @@ void DArray_clear(DArray *array)
 static inline int DArray_resize(DArray *array, size_t newsize)
 {
 	array->max = newsize;
-	check(array->max > 0, "The newsize must be > 0");
+	check(array->max > 0, "The newsize must be > 0.");
 
 	void *contents = realloc(array->contents, array->max * sizeof(void *));
 	// check contents and assume realloc doesn't harm the original on error
@@ -89,17 +89,16 @@ error:
 
 int DArray_push(DArray *array, void *el)
 {
+
+	array->contents[array->end] = el;
+	array->end++;
+
 	if(array->end == array->max)
 	{
-		DArray_expand(array);
-	}
-
-	int idx = array->end;
-	idx++;
-	array->contents[idx] = el;
-	array->end = idx;
-
+		return DArray_expand(array);
+	} else{
 	return 0;
+	}
 
 error:
 	return 1;
