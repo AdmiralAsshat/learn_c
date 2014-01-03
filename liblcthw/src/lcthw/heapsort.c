@@ -4,7 +4,8 @@
 /* Simple heapsort prog
 TODO: Get heapsort working on fixed array, then implement on DArray */
 
-void swap(int *a, int *b);
+#define SWAP(r,s)  do{int t=r; r=s; s=t; } while(0)
+
 int heapify(int *a, int count);
 int siftDown(int *a, int start, int end);
 int heapsort(int *a, int count);
@@ -12,30 +13,21 @@ int heapsort(int *a, int count);
 int main(int argc, char *argv[])
 {
 	int i;
-	double to_sort[] = { 34, 7, 19, 25, 1, 78, 4 };
+	int to_sort[] = { 34, 7, 19, 25, 1, 78, 4 };
 	int size = (sizeof(to_sort) / sizeof(to_sort[0]));
 
 	printf("Array Size: %d\n", size);
 	printf("Before sort: ");
-	for(i = 0; i < size; i++)  printf("%d,", (int)to_sort[i]); 
+	for(i = 0; i < size; i++)  printf("%d,", to_sort[i]); 
 	printf("\n");
 
 	heapsort(to_sort, size);
 
 	printf("After sort: ");
-	for(i = 0; i < size; i++)  printf("%d",(int) to_sort[i]); 
+	for(i = 0; i < size; i++)  printf("%d,", to_sort[i]); 
 	printf("\n");
 
 	return 0;
-}
-
-void swap(int *a, int *b)
-{
-	int temp;
-	
-	temp = a;
-	a = b;
-	b = temp;
 }
 
 int heapify(int *a, int count)
@@ -45,6 +37,7 @@ int heapify(int *a, int count)
 	do
 	{
 		siftDown(a, start, count - 1);
+		start--;
 	} while (start >= 0);
 
 	return 0;
@@ -65,7 +58,7 @@ int siftDown(int *a, int start, int end)
 			to_swap = child + 1;
 		if (to_swap != root)
 		{
-			swap(a[root], a[to_swap]);
+			SWAP(a[root], a[to_swap]);
 			root = to_swap;
 		} else
 			return;
@@ -80,7 +73,7 @@ int heapsort(int *a, int count)
 	unsigned int end = count - 1;
 	do
 	{
-		swap(a[end], a[0]);
+		SWAP(a[end], a[0]);
 		end--;
 		siftDown(a, 0, end);
 	} while (end > 0);
