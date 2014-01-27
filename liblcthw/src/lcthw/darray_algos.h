@@ -11,7 +11,7 @@ int DArray_heapsort(DArray *array, DArray_compare cmp);
 
 int DArray_mergesort(DArray *array, DArray_compare cmp);
 
-int DArray_swap(void *a, void *b);
+inline void DArray_swap(void *a, void *b);
 
 int mergesort(void *array, int length, int size, DArray_compare cmp);
 
@@ -19,6 +19,6 @@ int heapify(void *a, int count);
 
 int siftDown(void **a, int start, int end);
 
-int heapsort(void **a, int count);
+int heapsort(void **a, int count, int size, DArray_compare cmp);
 
 #endif

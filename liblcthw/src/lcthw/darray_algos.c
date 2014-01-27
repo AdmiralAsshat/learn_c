@@ -48,9 +48,11 @@ int siftDown(void **a, int start, int end)
 	{
 		int child = (root * 2) + 1;
 		int to_swap = root;
-		if (a[to_swap] < a[child])
+//		if (a[to_swap] < a[child])
+		if (strcmp(a[to_swap], a[child]) < 1)
 			to_swap = child;
-		if (child+1 <= end && a[to_swap] < a[child + 1])
+//		if (child+1 <= end && a[to_swap] < a[child + 1])
+		if (child+1 <= end && strcmp(a[to_swap], a[child + 1]) < 1)
 			to_swap = child + 1;
 		if (to_swap != root)
 		{
@@ -63,7 +65,7 @@ error:
 	return 1;
 }
 
-int heapsort(void **a, int count)
+int heapsort(void **a, int count, int size, DArray_compare cmp)
 {
 	unsigned int end;
 	heapify(a, count);
