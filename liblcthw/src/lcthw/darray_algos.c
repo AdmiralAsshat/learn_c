@@ -3,6 +3,14 @@
 
 //TODO: Work on mergesort, change all heapsort functions
 // to use proper compare fn pointers
+static inline void print_array(void **array, char *preface)
+{
+	unsigned int end;
+	printf(preface);
+	for (end = 0; array[end] != NULL; end++)
+		printf("%s ", array[end]);
+	printf("\n");
+}
 
 int DArray_qsort(DArray *array, DArray_compare cmp)
 {
@@ -32,19 +40,19 @@ int mergesort(void *array, int length, int size, DArray_compare cmp)
 	return 0;
 }
 
-int heapify(void *a, int count)
+int heapify(void *a, int count, DArray_compare cmp)
 {
 	int start;
 	for (start = (count - 2) / 2; start >=0; start--)
 	{
-		siftDown(a, start, count -1);
+		siftDown(a, start, count -1, cmp);
 	}
 	return 0;
 error:
 	return 1;
 }
 
-int siftDown(void **a, int start, int end)
+int siftDown(void **a, int start, int end, DArray_compare cmp)
 {
 	int root = start;	
 	while((root * 2) + 1 <= end)
@@ -70,14 +78,19 @@ error:
 int heapsort(void **a, int count, int size, DArray_compare cmp)
 {
 	unsigned int end;
-	heapify(a, count);
+	heapify(a, count, cmp);
+
+	print_array(a,"Before sort: ");
 
 	for (end = count - 1; end > 0; end--)
 	{
 		DArray_swap(&a[end], &a[0]);
-		/*end--;*/
-		siftDown(a, 0, end - 1);
+		siftDown(a, 0, end - 1, cmp);
 	} 
+
+	//Debug block
+	print_array(a,"After sort: ");
+	//End block */
 
 	return 0;
 
