@@ -60,9 +60,9 @@ int siftDown(void **a, int start, int end, DArray_compare cmp)
 		int child = (root * 2) + 1;
 		int to_swap = root;
 
-		if (strcmp(a[to_swap], a[child]) < 0)
+		if (cmp(&a[to_swap], &a[child]) < 0)
 			to_swap = child;
-		if (child+1 <= end && strcmp(a[to_swap], a[child + 1]) < 0)
+		if (child+1 <= end && cmp(&a[to_swap], &a[child + 1]) < 0)
 			to_swap = child + 1;
 		if (to_swap != root)
 		{

@@ -23,7 +23,7 @@ static int check_order(RadixMap *map)
 	unsigned int i = 0;
 
 	// only signal errors if any (should not be)
-	for (i = 0; map->end > 0 && i < map->end - 1; i++)
+	for (i = 0; map->end > 0 && i < map->end-1; i++)
 	{
 		d1 = map->contents[i];
 		d2 = map->contents[i+1];
@@ -59,13 +59,13 @@ error:
 	return 0;
 }
 
-//test for big number of elements
+// test for big number of elements
 static char *test_operations()
 {
 	size_t N = 200;
 
 	RadixMap *map = RadixMap_create(N);
-	mu_assert(map !=NULL, "Failed to make the map.");
+	mu_assert(map != NULL, "Failed to make the map.");
 	mu_assert(make_random(map), "Didn't make a random fake radix map.");
 
 	RadixMap_sort(map);
@@ -84,7 +84,7 @@ static char *test_operations()
 		mu_assert(RadixMap_delete(map, el) == 0, "Didn't delete it.");
 		mu_assert(old_end - 1 == map->end, "Wrong size after delete.");
 
-		//test that the end is now the old value, but uint32 max so it trails off
+		// test that the end is now the old value, but uint32 max so it trails off
 		mu_assert(check_order(map), "RadixMap didn't stay sorted after delete.");
 	}
 
