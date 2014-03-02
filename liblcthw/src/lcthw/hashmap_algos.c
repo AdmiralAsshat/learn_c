@@ -21,13 +21,15 @@ uint32_t Hashmap_fnv1a_hash(void *data)
 	return hash;
 }
 
+const int MOD_ADLER = 65521;
+
 uint32_t Hashmap_adler32_hash(void *data)
 {
 	bstring s = (bstring)data;
 	uint32_t a = 1, b = 0;
 	int i = 0;
 
-	for(i = 0; o < blength(s); i++)
+	for(i = 0; i < blength(s); i++)
 	{
 		a = (a + bchare(s, i, 0)) % MOD_ADLER;
 		b = (b + a) % MOD_ADLER;
