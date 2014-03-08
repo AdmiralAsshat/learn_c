@@ -2,8 +2,8 @@
 #include <limits.h>
 
 static inline void String_setup_skip_chars(
-	size_t *skip_chars,
-	const unsigned char *needle, ssize_t nlen)
+		size_t *skip_chars,
+		const unsigned char *needle, ssize_t nlen)
 {
 	size_t i = 0;
 	size_t last = nlen - 1;
@@ -65,7 +65,7 @@ int String_find(bstring in, bstring what)
 
 	found = String_base_search(haystack, hlen, needle, nlen, skip_chars);
 
-	return found != NULL ? found - haystack : - 1;
+	return found != NULL ? found - haystack : -1;
 }
 
 StringScanner *StringScanner_create(bstring in)
@@ -124,9 +124,9 @@ int StringScanner_scan(StringScanner *scan, bstring tofind)
 	{
 		found_at = found - (const unsigned char *)bdata(scan->in);
 		scan->haystack = found + scan->nlen;
-		scan->hlen -= found_at + scan->nlen;
+		scan->hlen -= found_at - scan->nlen;
 	} else {
-		//done, reset the setu
+		//done, reset the setup
 		StringScanner_reset(scan);
 		found_at = -1;
 	}
@@ -137,5 +137,7 @@ int StringScanner_scan(StringScanner *scan, bstring tofind)
 void StringScanner_destroy(StringScanner *scan)
 {
 	if(scan)
+	{
 		free(scan);
+	}
 }
