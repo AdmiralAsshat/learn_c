@@ -33,7 +33,7 @@ char *test_send_recv()
 
 	mu_assert(Queue_count(queue) == 0, "Wrong count after recv.");
 
-	return NULL:
+	return NULL;
 }
 
 char *all_tests()
@@ -47,4 +47,4 @@ char *all_tests()
 	return NULL;
 }
 
-RUN TESTS(all_tests);
+RUN_TESTS(all_tests);

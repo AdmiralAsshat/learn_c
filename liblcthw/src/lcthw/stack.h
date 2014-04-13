@@ -1,7 +1,7 @@
 #ifndef _stack_h
 #define _stack_h
 
-#include <List.h>
+#include <lcthw/list.h>
 
 #define Stack_create List_create
 #define Stack_destroy List_destroy
